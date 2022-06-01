@@ -1,0 +1,162 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "hours_rate_type": {
+      "type": "string"
+    },
+    "abnormal_address": {
+      "type": "boolean"
+    },
+    "abnormal_person_id": {
+      "type": "string"
+    },
+    "abnormal_organization_id": {
+      "type": "string"
+    },
+    "abnormal_contact_id": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "simplicate_url": {
+      "type": "string"
+    },
+    "is_reverse_billing": {
+      "type": "boolean"
+    },
+    "is_invoice_approval": {
+      "type": "boolean"
+    },
+    "my_organization_profile_id": {
+      "type": "string"
+    },
+    "person_id": {
+      "type": "string"
+    },
+    "organization_id": {
+      "type": "string"
+    },
+    "contact_id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "billable": {
+      "type": "boolean"
+    },
+    "can_register_mileage": {
+      "type": "boolean"
+    },
+    "project_number": {
+      "type": "string"
+    },
+    "note": {
+      "type": "string"
+    },
+    "start_date": {
+      "type": "string"
+    },
+    "end_date": {
+      "type": "string"
+    },
+    "invoice_reference": {
+      "type": "string"
+    },
+    "employees": {
+      "type": [
+        "null",
+        "array"
+      ],
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type:": "string"
+          },
+          "person_id": {
+            "type:": "string"
+          },
+          "name": {
+            "type:": "string"
+          }
+        }
+      }
+    },
+    "custom_fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "budget": {
+      "type": "object",
+      "properties": {
+        "hours": {
+          "type": "object",
+          "properties": {
+            "amount_budget": {
+              "type": "number"
+            },
+            "amount_spent": {
+              "type": "number"
+            },
+            "value_budget": {
+              "type": "number"
+            },
+            "value_spent": {
+              "type": "number"
+            }
+          }
+        },
+        "costs": {
+          "type": "object",
+          "properties": {
+            "value_budget": {
+              "type": "number"
+            },
+            "value_spent": {
+              "type": "number"
+            }
+          }
+        },
+        "total": {
+          "type": "object",
+          "properties": {
+            "value_budget": {
+              "type": "number"
+            },
+            "value_spent": {
+              "type": "number"
+            },
+            "value_invoiced": {
+              "type": "number"
+            }
+          }
+        }
+      }
+    }
+  }
+}

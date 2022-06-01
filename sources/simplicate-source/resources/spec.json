@@ -1,0 +1,32 @@
+{
+  "documentationUrl": "https://developer.simplicate.com/explore",
+  "connectionSpecification": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Simplicate Spec",
+    "type": "object",
+    "required": [
+      "server_url",
+      "authentication_key",
+      "authentication_secret"
+    ],
+    "additionalProperties": false,
+    "properties": {
+      "server_url": {
+        "type": "string",
+        "title": "Simplicate Server URL",
+        "examples": [
+          "https://swagger.simplicate.nl"
+        ]
+      },
+      "authentication_key": {
+        "type": "string",
+        "title": "Authentication-Key"
+      },
+      "authentication_secret": {
+        "type": "string",
+        "title": "Authentication-Secret",
+        "airbyte_secret": true
+      }
+    }
+  }
+}
