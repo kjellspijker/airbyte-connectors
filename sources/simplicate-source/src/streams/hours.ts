@@ -2,13 +2,13 @@ import { AirbyteConfig, AirbyteLogger, AirbyteStreamBase, StreamKey, SyncMode } 
 import { Dictionary } from 'ts-essentials';
 import axios from "axios";
 
-export class Projects extends AirbyteStreamBase {
+export class Hours extends AirbyteStreamBase {
     constructor(readonly config: AirbyteConfig, logger: AirbyteLogger) {
         super(logger);
     }
 
     getJsonSchema(): Dictionary<any, string> {
-        return require('../../resources/schemas/projects.json');
+        return require('../../resources/schemas/hours.json');
     }
 
     get primaryKey(): StreamKey {
@@ -38,7 +38,7 @@ export class Projects extends AirbyteStreamBase {
         let loadedAllData = false;
 
         do {
-            const response = await axios.get(this.config.server_url + '/api/v2/projects/project', {
+            const response = await axios.get(this.config.server_url + '/api/v2/hours/hours', {
                 headers: {
                     'Authentication-Key': this.config.authentication_key,
                     'Authentication-Secret': this.config.authentication_secret,
@@ -48,8 +48,8 @@ export class Projects extends AirbyteStreamBase {
                 params,
             });
 
-            for (const project of response.data.data) {
-                yield project;
+            for (const hour of response.data.data) {
+                yield hour;
             }
 
             loadedAllData = response.data.data.length < params.limit;

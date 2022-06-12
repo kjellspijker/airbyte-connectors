@@ -1,0 +1,234 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "is_user": {
+      "type": "boolean"
+    },
+    "teams": {
+      "type": [
+        "null",
+        "array"
+      ],
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "supervisor": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "person_id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "person": {
+      "type": "object",
+      "properties": {
+        "date_of_birth": {
+          "type": "string"
+        },
+        "gender_id": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "address": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "country": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "line_1": {
+              "type": "string"
+            },
+            "postal_code": {
+              "type": "string"
+            },
+            "locality": {
+              "type": "string"
+            },
+            "country_code": {
+              "type": "string"
+            },
+            "country_id": {
+              "type": "string"
+            }
+          }
+        },
+        "email": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "twitter_url": {
+          "type": "string"
+        },
+        "linkedin_url": {
+          "type": "string"
+        },
+        "facebook_url": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "full_name": {
+          "type": "string"
+        }
+      }
+    },
+    "status": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        }
+      }
+    },
+    "custom_fields": {
+      "type": [
+        "null",
+        "array"
+      ],
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "render_type": {
+            "type": "string"
+          },
+          "position": {
+            "type": "number"
+          },
+          "value_type": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "person_id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "bank_account": {
+      "type": "string"
+    },
+    "function": {
+      "type": "string"
+    },
+    "type": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        }
+      }
+    },
+    "employment_status": {
+      "type": "string"
+    },
+    "civil_status": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        }
+      }
+    },
+    "work_phone": {
+      "type": "string"
+    },
+    "work_mobile": {
+      "type": "string"
+    },
+    "work_email": {
+      "type": "string"
+    },
+    "hourly_sales_tariff": {
+      "type": "string"
+    },
+    "hourly_cost_tariff": {
+      "type": "string"
+    },
+    "avatar": {
+      "type": "object",
+      "properties": {
+        "url_small": {
+          "type": "string"
+        },
+        "url_large": {
+          "type": "string"
+        },
+        "initials": {
+          "type": "string"
+        },
+        "color": {
+          "type": "string"
+        }
+      }
+    },
+    "created": {
+      "type": "string"
+    },
+    "modified": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "simplicate_url": {
+      "type": "string"
+    },
+    "timeline_email_address": {
+      "type": "string"
+    }
+  }
+}

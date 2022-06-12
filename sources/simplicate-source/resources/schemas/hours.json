@@ -1,0 +1,199 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "employee": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "project": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "organization": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "projectservice": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "until_date": {
+          "type": "string"
+        },
+        "default_service_id": {
+          "type": "string"
+        },
+        "revenue_group_id": {
+          "type": "string"
+        }
+      }
+    },
+    "type": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "vatclass": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "label": {
+              "type": "string"
+            },
+            "percentage": {
+              "type": "number"
+            }
+          }
+        },
+        "label": {
+          "type": "string"
+        },
+        "tariff": {
+          "type": "string"
+        },
+        "color": {
+          "type": "string"
+        }
+      }
+    },
+    "tariff": {
+      "type": "number"
+    },
+    "custom_fields": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "label": {
+              "type": "string"
+            },
+            "render_type": {
+              "type": "string"
+            },
+            "position": {
+              "type": "number"
+            },
+            "value_type": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "locked": {
+      "type": "boolean"
+    },
+    "is_editable": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "boolean"
+        }
+      }
+    },
+    "is_deletable": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "boolean"
+        }
+      }
+    },
+    "status": {
+      "type": "string"
+    },
+    "corrections": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "number"
+        },
+        "value": {
+          "type": "number"
+        },
+        "last_correction_date": {
+          "type": "string"
+        }
+      }
+    },
+    "is_productive": {
+      "type": "boolean"
+    },
+    "hours": {
+      "type": "number"
+    },
+    "start_date": {
+      "type": "string"
+    },
+    "end_date": {
+      "type": "string"
+    },
+    "is_time_defined": {
+      "type": "boolean"
+    },
+    "is_recurring": {
+      "type": "boolean"
+    },
+    "is_external": {
+      "type": "boolean"
+    },
+    "billable": {
+      "type": "boolean"
+    },
+    "should_sync_to_cronofy": {
+      "type": "boolean"
+    },
+    "source": {
+      "type": "string"
+    }
+  }
+}

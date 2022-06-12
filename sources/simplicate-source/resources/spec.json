@@ -26,6 +26,10 @@
         "type": "string",
         "title": "Authentication-Secret",
         "airbyte_secret": true
+      },
+      "sleep_time": {
+        "type": "integer",
+        "title": "Sleep time (ms)"
       }
     }
   }

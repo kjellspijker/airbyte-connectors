@@ -2,21 +2,17 @@ import { AirbyteConfig, AirbyteLogger, AirbyteStreamBase, StreamKey, SyncMode } 
 import { Dictionary } from 'ts-essentials';
 import axios from "axios";
 
-export class Projects extends AirbyteStreamBase {
+export class HoursTypes extends AirbyteStreamBase {
     constructor(readonly config: AirbyteConfig, logger: AirbyteLogger) {
         super(logger);
     }
 
     getJsonSchema(): Dictionary<any, string> {
-        return require('../../resources/schemas/projects.json');
+        return require('../../resources/schemas/hoursTypes.json');
     }
 
     get primaryKey(): StreamKey {
         return 'id';
-    }
-
-    get cursorField(): string | string[] {
-        return 'updated_at';
     }
 
     async* readRecords(
@@ -28,17 +24,12 @@ export class Projects extends AirbyteStreamBase {
         const params = {
             'limit': 100,
             'offset': 0,
-            'sort': 'updated_at',
         };
-
-        if (Object.prototype.hasOwnProperty.call(streamState, 'cutoff')) {
-            params['q[updated_at][ge]'] = streamState.cutoff;
-        }
 
         let loadedAllData = false;
 
         do {
-            const response = await axios.get(this.config.server_url + '/api/v2/projects/project', {
+            const response = await axios.get(this.config.server_url + '/api/v2/hours/hourstype', {
                 headers: {
                     'Authentication-Key': this.config.authentication_key,
                     'Authentication-Secret': this.config.authentication_secret,
@@ -48,8 +39,8 @@ export class Projects extends AirbyteStreamBase {
                 params,
             });
 
-            for (const project of response.data.data) {
-                yield project;
+            for (const hoursType of response.data.data) {
+                yield hoursType;
             }
 
             loadedAllData = response.data.data.length < params.limit;
@@ -59,14 +50,5 @@ export class Projects extends AirbyteStreamBase {
             // sleep 1 second to avoid hitting rate limits
             await new Promise(resolve => setTimeout(resolve, this.config.sleep_time));
         } while (!loadedAllData);
-    }
-
-    getUpdatedState(
-        currentStreamState: Dictionary<any>,
-        latestRecord: Dictionary<any>
-    ): Dictionary<any> {
-        return {
-            cutoff: latestRecord.updated_at > currentStreamState.updated_at ? latestRecord.updated_at : currentStreamState.updated_at,
-        };
     }
 }
