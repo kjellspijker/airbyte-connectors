@@ -65,8 +65,20 @@ export class Hours extends AirbyteStreamBase {
         currentStreamState: Dictionary<any>,
         latestRecord: Dictionary<any>
     ): Dictionary<any> {
+        if (currentStreamState.cutoff == null) {
+            return {
+                cutoff: latestRecord.updated_at,
+            };
+        }
+
+        if (latestRecord.updated_at === '0000-00-00 00:00:00') {
+            return {
+                cutoff: currentStreamState.cutoff,
+            };
+        }
+
         return {
-            cutoff: latestRecord.updated_at > currentStreamState.updated_at ? latestRecord.updated_at : currentStreamState.updated_at,
+            cutoff: new Date(latestRecord.updated_at) > new Date(currentStreamState.cutoff) ? latestRecord.updated_at : currentStreamState.cutoff,
         };
     }
 }

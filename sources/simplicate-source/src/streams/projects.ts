@@ -65,8 +65,14 @@ export class Projects extends AirbyteStreamBase {
         currentStreamState: Dictionary<any>,
         latestRecord: Dictionary<any>
     ): Dictionary<any> {
+        if (currentStreamState.cutoff == null) {
+            return {
+                cutoff: latestRecord.updated_at,
+            };
+        }
+
         return {
-            cutoff: latestRecord.updated_at > currentStreamState.updated_at ? latestRecord.updated_at : currentStreamState.updated_at,
+            cutoff: new Date(latestRecord.updated_at) > new Date(currentStreamState.cutoff) ? latestRecord.updated_at : currentStreamState.cutoff,
         };
     }
 }
