@@ -3,8 +3,11 @@ import { Dictionary } from 'ts-essentials';
 import axios from "axios";
 
 export class Hours extends AirbyteStreamBase {
+    private date: Date;
+
     constructor(readonly config: AirbyteConfig, logger: AirbyteLogger) {
         super(logger);
+        this.date = new Date();
     }
 
     getJsonSchema(): Dictionary<any, string> {
@@ -35,18 +38,23 @@ export class Hours extends AirbyteStreamBase {
             params['q[updated_at][ge]'] = streamState.cutoff;
         }
 
+        yield* await this.loadAllData(params);
+
+        if (Object.prototype.hasOwnProperty.call(params, 'q[updated_at][ge]')) {
+            delete params['q[updated_at][ge]'];
+            params.sort = 'created_at';
+            params.offset = 0;
+            params['q[created_at][ge]'] = streamState.cutoff;
+
+            yield* await this.loadAllData(params);
+        }
+    }
+
+    private async* loadAllData(params: { offset: number; limit: number; sort: string }) {
         let loadedAllData = false;
 
         do {
-            const response = await axios.get(this.config.server_url + '/api/v2/hours/hours', {
-                headers: {
-                    'Authentication-Key': this.config.authentication_key,
-                    'Authentication-Secret': this.config.authentication_secret,
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                params,
-            });
+            const response = await this.makeRequest(params);
 
             for (const hour of response.data.data) {
                 yield hour;
@@ -56,29 +64,29 @@ export class Hours extends AirbyteStreamBase {
 
             params['offset'] += params.limit;
 
-            // sleep 1 second to avoid hitting rate limits
+            // sleep to avoid hitting rate limits
             await new Promise(resolve => setTimeout(resolve, this.config.sleep_time));
         } while (!loadedAllData);
+    }
+
+    private async makeRequest(params: { offset: number; limit: number; sort: string }) {
+        return await axios.get(this.config.server_url + '/api/v2/hours/hours', {
+            headers: {
+                'Authentication-Key': this.config.authentication_key,
+                'Authentication-Secret': this.config.authentication_secret,
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            params,
+        });
     }
 
     getUpdatedState(
         currentStreamState: Dictionary<any>,
         latestRecord: Dictionary<any>
     ): Dictionary<any> {
-        if (currentStreamState.cutoff == null) {
-            return {
-                cutoff: latestRecord.updated_at,
-            };
-        }
-
-        if (latestRecord.updated_at === '0000-00-00 00:00:00') {
-            return {
-                cutoff: currentStreamState.cutoff,
-            };
-        }
-
         return {
-            cutoff: new Date(latestRecord.updated_at) > new Date(currentStreamState.cutoff) ? latestRecord.updated_at : currentStreamState.cutoff,
+            cutoff: (new Intl.DateTimeFormat('sv-se', { dateStyle: 'short', timeStyle: 'medium' })).format(this.date),
         };
     }
 }
